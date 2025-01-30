@@ -1,8 +1,15 @@
 import { Text, View } from "react-native";
 import Menu from "./components/Menu";
 import { Player } from "./components/Menu";
+import useAppStore from "./store/appStore";
+import { useEffect } from "react";
 
 export default function Index() {
+  const { user } = useAppStore();
+
+  useEffect(() => {
+    console.log("user : " + user);
+  }, [user])
 
   const player : Player = {
     id: 1,
