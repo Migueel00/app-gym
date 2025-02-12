@@ -1,6 +1,6 @@
 import React from "react"
 import { useState, useEffect} from "react"
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
 export interface Player{
     id: number,
@@ -29,24 +29,11 @@ function Menu({ player } : MenuProps) {
         
     return (
         
-        <view>
+        <View>
             { isRendered ? (<Text>{player.id}</Text>
             ) : null}
             <Text>{player.nickname}</Text>
-        </view>
-    )
-}
-
-
-const MenuContainer = () => {
-    const player : Player = {
-        id: 1,
-        nickname: 'PlayerOne'
-
-    }
-
-    return (
-        <Menu player={player}/>
+        </View>
     )
 }
 
