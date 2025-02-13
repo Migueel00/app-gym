@@ -2,14 +2,18 @@ import { Text, View } from "react-native";
 import Menu from "./components/Menu";
 import { Player } from "./components/Menu";
 import useAppStore from "@/src/store/appStore";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
+import { useSplashScreenLogic } from "@/src/hooks/useSplashScreenLogic";
 
-SplashScreen.preventAutoHideAsync();
 
-export default function Index() {
-	const [appIsReady, setAppIsReady] = useState<boolean>(false);
+export default function Index(){
+	const appIsReady = useSplashScreenLogic();
 	const { user } = useAppStore();
+	
+	useEffect(() => {
+		SplashScreen.preventAutoHideAsync();
+	}, [])
 
 	useEffect(() => {
 		console.log("user : " + user);
@@ -19,11 +23,6 @@ export default function Index() {
 		id: 1,
 		nickname: 'PlayerOne'
 	}
-
-
-	useEffect(() => {
-		setAppIsReady(true);
-	}, []);
 
 	const onLayoutRootView = useCallback(async () => {
 		if (appIsReady) {
@@ -43,6 +42,7 @@ export default function Index() {
 				alignItems: "center",
 			}}
 			onLayout={onLayoutRootView}
+			testID="root-view"
 		>
 			<Text>Edit app/index.tsx to edit this screen.</Text>
 			<Menu player={player}></Menu>
